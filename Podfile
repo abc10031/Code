@@ -6,6 +6,8 @@ pod "AFNetworking"
 pod "MOBFoundation_IDFA"
 # SMSSDK必须
 pod "SMSSDK"
+# AutoLayout
+pod "Masonry"
 
 
 target :Code  do

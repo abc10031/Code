@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "YCTabBarController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,7 +19,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+   //当我们把main.storyboard 关联去除掉，那么打开app只会展示一个黑色的window ，没有控制器，我们需要手动创建
+    
+    [self setupWindow];
+    //一般情况下 为了防止AppDelegate 方法里面需要添加的东西过多，显得程序混乱，我们会将不同的模块封装起来
+    
     return YES;
+}
+
+
+- (void)setupWindow {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.window.rootViewController = [[YCTabBarController alloc] init];
+    
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
