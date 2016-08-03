@@ -10,7 +10,9 @@
 #import <Masonry.h>
 //这个里面封装了一个方法  可以让我们通过一个颜色 生成一张纯色的图片
 #import "UIButton+BackgroundColor.h"
-
+#import "YCForgetPwdViewController.h"
+#import "UIControl+ActionBlocks.h"
+#import "YCRegisterViewController.h"
 @interface YCLoginViewController ()
 
 @end
@@ -123,8 +125,34 @@
     //登陆按钮的宽度和左边距保持跟父控件相对位置不变
     loginButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
     
+    [forgetPwdButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+//    [forgetPwdButton addTarget:self action:@selector(goToForget) forControlEvents:UIControlEventTouchUpInside];
+    //我们还可以将按钮的事件与按钮写到一块
+    //1。
+    [forgetPwdButton handleControlEvents:UIControlEventTouchUpInside withBlock:^(id weakSender) {
+        
+        //把按钮的事件回调写到 block 里， 便于我们在写界面的时候 方便的加入控制事件
+        YCForgetPwdViewController *forgetVC = [[YCForgetPwdViewController alloc] init];
+        
+        [self.navigationController pushViewController:forgetVC animated:YES];
+    }];
+    
+    
+    //这里就用系统自带的
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleDone target:self action:@selector(goToRegister)];
     
 }
+/**
+ *  点击注册调用此方法
+ */
+- (void)goToRegister {
+    
+    YCRegisterViewController *registerVC = [[YCRegisterViewController alloc] init];
+    
+    [self.navigationController pushViewController:registerVC animated:YES];
+}
+
 //界面将要出现
 - (void)viewWillAppear:(BOOL)animated {
     

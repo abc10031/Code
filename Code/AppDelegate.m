@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <SMS_SDK/SMSSDK.h>
 
 #import "YCTabBarController.h"
 
@@ -24,9 +25,17 @@
     [self setupWindow];
     //一般情况下 为了防止AppDelegate 方法里面需要添加的东西过多，显得程序混乱，我们会将不同的模块封装起来
     
+    
+    //Mob 初始化
+    
+    [self setupMob];
     return YES;
 }
 
+- (void)setupMob {
+    
+    [SMSSDK registerApp:MobApp withSecret:MobSecret];
+}
 
 - (void)setupWindow {
     
