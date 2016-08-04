@@ -17,4 +17,9 @@
 
 #import "QFCommonSetting.h"
 
+#import "YCNetwokTool.h"
+#import "UIAlertView+Block.h"
+
+#import <YYModel.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #endif /* PrefixHeader_pch */

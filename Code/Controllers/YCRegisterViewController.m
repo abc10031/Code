@@ -11,8 +11,18 @@
 #import "UIButton+BackgroundColor.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "UIControl+ActionBlocks.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+
+#import "NSTimer+Addition.h"
+#import "NSTimer+Blocks.h"
+#import "NSString+MD5.h"
+#import "UIAlertView+Block.h"
 @interface YCRegisterViewController ()
+
+/** 等待时间*/
+@property (nonatomic ,strong) NSNumber *waitTime;
+
+/** 定时器*/
+@property (nonatomic ,strong) NSTimer *timer;
 
 @end
 
@@ -130,6 +140,7 @@
     [rightButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [rightButton setBackgroundColor:[UIColor greenColor] forState:UIControlStateNormal];
     [rightButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    [rightButton setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:14 weight:-0.15];
     rightButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     rightButton.layer.borderWidth = 1.0f;
@@ -186,13 +197,18 @@
         }
     }];
     
+    //我们给等待时间赋初值
+    self.waitTime  = @ -1;
+    
     //获取验证码按钮默认设置为NO
     rightButton.enabled = NO;
+    
+    
     //我们可以直接将某个信号处理的返回结果，设置为某个对象的属性值
     //combineLatest 一堆信号的集合
-    RAC(rightButton,enabled) = [RACSignal combineLatest:@[phoneField.rac_textSignal] reduce:^(NSString * phone){
+    RAC(rightButton,enabled) = [RACSignal combineLatest:@[phoneField.rac_textSignal,RACObserve(self, waitTime)] reduce:^(NSString * phone , NSNumber *waitTime){
         
-        return @(phone.length >= 11);
+        return @(phone.length >= 11 && waitTime.integerValue <= 0);
     }];
     
     
@@ -206,28 +222,84 @@
     //添加事件
     [rightButton handleControlEvents:UIControlEventTouchUpInside withBlock:^(id weakSender) {
         
+        
+        self.waitTime = @60;
         //发送验证码
         [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phoneField.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
             
             if (error) {
-                
+                self.waitTime = @-1;
+                NSLog(@"%@",error);
             }else {
                 NSLog(@"获取验证码成功");
+                
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f block:^{
+                   
+                        
+                self.waitTime = [NSNumber numberWithInteger:self.waitTime.integerValue - 1];
+                    
+                } repeats:YES];
             }
         }];
     }];
     
+    //用RAC 监控数据的变化响应相应的界面
+    [RACObserve(self, waitTime) subscribeNext:^(NSNumber *waitTime){
+        
+        if (waitTime.integerValue <= 0) {
+            [self.timer invalidate];
+            self.timer = nil;
+            [rightButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        }else if(waitTime.integerValue > 0){
+            [rightButton setTitle:[NSString stringWithFormat:@"等待%@秒",waitTime] forState:UIControlStateNormal];
+        }
+    }];
+    
+    
+    
+    [[registerButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        
+        NSDictionary *params = @{
+                                 @"service":@"User.Register",
+                                 @"phone":phoneField.text,
+                                 @"password":pwdField.text.md532BitUpper,
+                                 @"verificationCode":passField.text
+                                 
+                                 };
+        
+        [YCNetwokTool getDataWithParameters:params andCompleteBlock:^(BOOL success, id result) {
+            if (success) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                [UIAlertView alertWithCallBackBlock:nil title:@"温馨提示" message:result cancelButtonName:@"取消" otherButtonTitles:nil, nil];
+            }
+            
+        }];
+    }];
+    
 }
-
-//我的需求
-//1.账号输入框用户只可以输入数字
-//2.当用户输入完11个数字，不能继续输入
-//3.当账号输入框，少于11个数字，那么获取验证码灰色不可点
-//4.当账号为11个数字，密码大于等于6个长度，验证码为4个数字，注册按钮可用
-
-//怎么做？
-//1.设置键盘样式
-//2.可以在代理方法里判断 如果输入框长度大于11，返回NO
-//3.也可以在代理方法里面处理
-//4.也可以在代理方法里面处理
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.view endEditing:YES];
+}
+//1点击发送验证码，按钮变为不可用，发送验证码
+//2如果发送成功，按钮不可用，按钮上面显示60秒倒计时
+//3.如果发送失败，按钮设置为可用，提示发送失败
+//4.当倒计时结束的时候，将按钮设置为可用（还要同时考虑到手机号是否符合规则）
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

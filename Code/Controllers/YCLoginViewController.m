@@ -13,6 +13,8 @@
 #import "YCForgetPwdViewController.h"
 #import "UIControl+ActionBlocks.h"
 #import "YCRegisterViewController.h"
+#import "NSString+MD5.h"
+#import "YCUserModel.h"
 @interface YCLoginViewController ()
 
 @end
@@ -142,7 +144,48 @@
     //这里就用系统自带的
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleDone target:self action:@selector(goToRegister)];
     
+    [phoneField handleControlEvents:UIControlEventEditingChanged withBlock:^(id weakSender) {
+        
+        if (phoneField.text.length >= 11) {
+            if (phoneField.text.length > 11) {
+                
+                phoneField.text = [phoneField.text substringToIndex:11];
+            }
+            [pwdField becomeFirstResponder];
+        }
+        
+    }];
+    
+    //控制登陆按钮的可用性
+    RAC(loginButton,enabled) = [RACSignal combineLatest:@[phoneField.rac_textSignal,pwdField.rac_textSignal] reduce:^(NSString *phone, NSString *pwd){
+        
+        return @(phone.length >= 11 && pwd.length >= 6);
+    }];
+    
+    /** 登陆 */
+    [loginButton handleControlEvents:UIControlEventTouchUpInside withBlock:^(id weakSender) {
+        
+        NSDictionary *params = @{
+                                 @"phone":phoneField.text,
+                                 @"password":pwdField.text.md532BitUpper,
+                                 @"service":@"User.Login"
+                                 };
+        [YCNetwokTool getDataWithParameters:params andCompleteBlock:^(BOOL success, id result) {
+            NSLog(@"%d",success);
+            if (success) {
+                NSLog(@"%@",result);
+               [[YCUserModel sharedUser] yy_modelSetWithDictionary:result];
+                
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }else {
+                [UIAlertView alertWithCallBackBlock:nil title:@"温馨提示" message:result cancelButtonName:@"取消" otherButtonTitles:nil, nil];
+            }
+        }];
+    }];
 }
+
+
+
 /**
  *  点击注册调用此方法
  */
@@ -151,6 +194,11 @@
     YCRegisterViewController *registerVC = [[YCRegisterViewController alloc] init];
     
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.view endEditing:YES];
 }
 
 //界面将要出现

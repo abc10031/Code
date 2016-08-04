@@ -30,7 +30,7 @@ static AFHTTPSessionManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:baseUrl]];
+        manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:QFAppBaseURL]];
         
         manager.requestSerializer.timeoutInterval = 30;
         
@@ -58,12 +58,12 @@ static AFHTTPSessionManager *manager;
             
             if (dataMsg.length) {//没有数据错误
                 if (complete) {
-                    complete(YES,dataMsg);
+                    complete(NO, dataMsg);
                 }
                 
             }else {
                 if (complete) {
-                    complete(YES,data[@"data"]);
+                    complete(YES, data[@"data"]);
                 }
             }
             
