@@ -24,4 +24,25 @@ OBJC_EXTERN NSString *const WNTESCerName;
 OBJC_EXTERN NSString *const MobApp;
 OBJC_EXTERN NSString *const MobSecret;
 
+
+
+
 #endif /* QFCodeShareInit_h */
+
+/* 应用内通知 */
+/**
+ *  注册成功
+ */
+OBJC_EXTERN  NSString *const YCRegisterSuccess;
+/**
+ *  获取用户信息成功
+ */
+OBJC_EXTERN  NSString *const YCGetInfoSuccess;
+/**
+ *  登录成功
+ */
+OBJC_EXTERN  NSString *const YCLogInSuccess;
+/**
+ *  用户注销
+ */
+OBJC_EXTERN  NSString *const YCLogOffSuccess;

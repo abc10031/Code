@@ -36,4 +36,8 @@
 + (BOOL)isLogin;
 
 + (YCUserModel *)sharedUser;
+
+
++ (void)loginWithInfo:(NSDictionary *)info;
++ (void)logOff;
 @end

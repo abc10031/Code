@@ -64,16 +64,16 @@ const NSString *const WNTESCerName = @"CodeShareDis";
 /**
  *  注册成功
  */
-const NSString *const WRegisterSuccess = @"RegisterSuccess";
+const NSString *const YCRegisterSuccess = @"RegisterSuccess";
 /**
  *  获取用户信息成功
  */
-const NSString *const WCGetInfoSuccess = @"GetUserInfoSuccess";
+const NSString *const YCGetInfoSuccess = @"GetUserInfoSuccess";
 /**
  *  登录成功
  */
-const NSString *const WLogInSuccess = @"LogInSuccess";
+const NSString *const YCLogInSuccess = @"LogInSuccess";
 /**
  *  用户注销
  */
-const NSString *const WLogOffSuccess = @"LogOffSuccess";
+const NSString *const YCLogOffSuccess = @"LogOffSuccess";

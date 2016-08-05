@@ -10,6 +10,7 @@
 #import "YCMainViewController.h"
 #import "YCUserModel.h"
 #import "YCLoginViewController.h"
+#import "YCMineViewController.h"
 
 @interface YCTabBarController ()
 
@@ -24,9 +25,20 @@
     //将所有的控制器按照MVC的思想配置好，并且封装起来
     [self setupViewControllers];
     
+    //设置界面显示样式
+    [self setUpAppearance];
 }
 
+- (void)setUpAppearance {
+    
+    //文本框光标的颜色
+//    [[UITextField appearance] setTintColor:[UIColor greenColor]];
+    //背景色
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0.990 green:1.000 blue:0.945 alpha:1.000]];
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.323 green:1.000 blue:0.529 alpha:1.000]];
 
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     
@@ -39,17 +51,7 @@
     }
 }
 
-- (void)showLoginViewController {
-    
-    YCLoginViewController *loginVC = [[YCLoginViewController alloc] init];
-    
-    //一般我们在使用模态视图是，都会用导航控制器包装一下
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    
-    //模态弹出登陆控制器
-    [self presentViewController:nav animated:YES completion:nil];
-    
-}
+
 
 /**
  *  添加子控制器
@@ -62,25 +64,25 @@
                                  @{
                                      @"class":[YCMainViewController class],
                                      @"title":@"首页",
-                                     @"icon":@"tabbar1"
+                                     @"icon":@"按钮主页"
                                      
                                      },
                                  @{
                                      @"class":[UIViewController class],
                                      @"title":@"首页",
-                                     @"icon":@"tabbar2"
+                                     @"icon":@"按钮消息"
                                      
                                      },
                                  @{
                                      @"class":[UIViewController class],
                                      @"title":@"首页",
-                                     @"icon":@"tabbar3"
+                                     @"icon":@"按钮分享"
                                      
                                      },
                                  @{
-                                     @"class":[UIViewController class],
-                                     @"title":@"首页",
-                                     @"icon":@"tabbar4"
+                                     @"class":[YCMineViewController class],
+                                     @"title":@"我的",
+                                     @"icon":@"按钮我的"
                                      
                                      },
                                  
@@ -99,6 +101,8 @@
         
         vc.title = [obj objectForKey:@"title"];
         
+        vc.tabBarItem.image = [UIImage imageNamed:[obj objectForKey:@"icon"]];
+        
         //再创建一个导航控制器，装入刚才创建的控制器
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         
@@ -112,4 +116,16 @@
     
 }
 
+
+- (void)showLoginViewController {
+    
+    YCLoginViewController *loginVC = [[YCLoginViewController alloc] init];
+    
+    //一般我们在使用模态视图是，都会用导航控制器包装一下
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    
+    //模态弹出登陆控制器
+    [self presentViewController:nav animated:YES completion:nil];
+    
+}
 @end

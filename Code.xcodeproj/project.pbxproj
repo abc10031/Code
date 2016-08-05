@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		B54F7C3E12491EF9D19364BC /* libPods-Code.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B6E4FDE505075B5641939B5 /* libPods-Code.a */; };
+		BC33E5341D5491100063D8E0 /* YCEditNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC33E5331D5491100063D8E0 /* YCEditNameViewController.m */; settings = {ASSET_TAGS = (); }; };
 		BC4A6B271D508341001D7433 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4A6B261D508341001D7433 /* main.m */; };
 		BC4A6B2A1D508341001D7433 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4A6B291D508341001D7433 /* AppDelegate.m */; };
 		BC4A6B321D508342001D7433 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4A6B311D508342001D7433 /* Assets.xcassets */; };
 		BC4A6B351D508342001D7433 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC4A6B331D508342001D7433 /* LaunchScreen.storyboard */; };
 		BC4A6B441D50954F001D7433 /* YCNetwokTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4A6B431D50954F001D7433 /* YCNetwokTool.m */; settings = {ASSET_TAGS = (); }; };
 		BCCD67C61D51F41E00C87C20 /* QFCodeShareInit.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCD67C41D51F41E00C87C20 /* QFCodeShareInit.m */; settings = {ASSET_TAGS = (); }; };
+		BCE00E261D543167008B8AA5 /* YCMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE00E251D543167008B8AA5 /* YCMineViewController.m */; settings = {ASSET_TAGS = (); }; };
+		BCE00E291D546AA0008B8AA5 /* YCSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE00E281D546AA0008B8AA5 /* YCSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		BCE00E2C1D5473D6008B8AA5 /* YCUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE00E2B1D5473D6008B8AA5 /* YCUserInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		BCFB0C8D1D517FB400714152 /* YCTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFB0C8C1D517FB400714152 /* YCTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		BCFB0C901D51860500714152 /* YCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFB0C8F1D51860500714152 /* YCMainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		BCFB0C941D51874200714152 /* YCUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFB0C931D51874200714152 /* YCUserModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -90,6 +94,8 @@
 /* Begin PBXFileReference section */
 		3B6E4FDE505075B5641939B5 /* libPods-Code.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Code.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6FA1B4FA6C8AC0FC8F5CB7 /* Pods-Code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Code.release.xcconfig"; path = "Pods/Target Support Files/Pods-Code/Pods-Code.release.xcconfig"; sourceTree = "<group>"; };
+		BC33E5321D5491100063D8E0 /* YCEditNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCEditNameViewController.h; sourceTree = "<group>"; };
+		BC33E5331D5491100063D8E0 /* YCEditNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCEditNameViewController.m; sourceTree = "<group>"; };
 		BC4A6B221D508341001D7433 /* Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Code.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4A6B261D508341001D7433 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4A6B281D508341001D7433 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -104,6 +110,12 @@
 		BCCD67C31D51F41E00C87C20 /* QFCodeShareInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFCodeShareInit.h; sourceTree = "<group>"; };
 		BCCD67C41D51F41E00C87C20 /* QFCodeShareInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFCodeShareInit.m; sourceTree = "<group>"; };
 		BCCD67C51D51F41E00C87C20 /* QFCommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFCommonSetting.h; sourceTree = "<group>"; };
+		BCE00E241D543167008B8AA5 /* YCMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCMineViewController.h; sourceTree = "<group>"; };
+		BCE00E251D543167008B8AA5 /* YCMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCMineViewController.m; sourceTree = "<group>"; };
+		BCE00E271D546AA0008B8AA5 /* YCSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCSettingViewController.h; sourceTree = "<group>"; };
+		BCE00E281D546AA0008B8AA5 /* YCSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCSettingViewController.m; sourceTree = "<group>"; };
+		BCE00E2A1D5473D6008B8AA5 /* YCUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCUserInfoViewController.h; sourceTree = "<group>"; };
+		BCE00E2B1D5473D6008B8AA5 /* YCUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCUserInfoViewController.m; sourceTree = "<group>"; };
 		BCFB0C8B1D517FB400714152 /* YCTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCTabBarController.h; sourceTree = "<group>"; };
 		BCFB0C8C1D517FB400714152 /* YCTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCTabBarController.m; sourceTree = "<group>"; };
 		BCFB0C8E1D51860500714152 /* YCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCMainViewController.h; sourceTree = "<group>"; };
@@ -336,6 +348,14 @@
 				BCFB0D751D51C16700714152 /* YCForgetPwdViewController.m */,
 				BCFB0D771D51C3BA00714152 /* YCRegisterViewController.h */,
 				BCFB0D781D51C3BA00714152 /* YCRegisterViewController.m */,
+				BCE00E241D543167008B8AA5 /* YCMineViewController.h */,
+				BCE00E251D543167008B8AA5 /* YCMineViewController.m */,
+				BCE00E271D546AA0008B8AA5 /* YCSettingViewController.h */,
+				BCE00E281D546AA0008B8AA5 /* YCSettingViewController.m */,
+				BCE00E2A1D5473D6008B8AA5 /* YCUserInfoViewController.h */,
+				BCE00E2B1D5473D6008B8AA5 /* YCUserInfoViewController.m */,
+				BC33E5321D5491100063D8E0 /* YCEditNameViewController.h */,
+				BC33E5331D5491100063D8E0 /* YCEditNameViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -764,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFB0D6F1D519D9D00714152 /* UIViewController+BackButtonHandler.m in Sources */,
+				BCE00E261D543167008B8AA5 /* YCMineViewController.m in Sources */,
 				BCFB0D571D519D9D00714152 /* UIImage+Tint.m in Sources */,
 				BCFB0D641D519D9D00714152 /* UITableViewCell+Config.m in Sources */,
 				BCFB0D3C1D519D9D00714152 /* NSObject+KVOBlocks.m in Sources */,
@@ -778,6 +799,7 @@
 				BCFB0C971D5188A900714152 /* YCLoginViewController.m in Sources */,
 				BCFB0D5D1D519D9D00714152 /* UINavigationController+BATransitions.m in Sources */,
 				BCFB0D511D519D9D00714152 /* UIImage+Capture.m in Sources */,
+				BCE00E291D546AA0008B8AA5 /* YCSettingViewController.m in Sources */,
 				BCFB0D3E1D519D9D00714152 /* NSObject+Runtime.m in Sources */,
 				BCFB0D581D519D9D00714152 /* UIImageView+Addition.m in Sources */,
 				BCFB0D611D519D9D00714152 /* UINavigationItem+Lock.m in Sources */,
@@ -799,6 +821,7 @@
 				BCCD67C61D51F41E00C87C20 /* QFCodeShareInit.m in Sources */,
 				BCFB0D441D519D9D00714152 /* NSString+UrlEncode.m in Sources */,
 				BCFB0D501D519D9D00714152 /* UIImage+CalculatedSize.m in Sources */,
+				BC33E5341D5491100063D8E0 /* YCEditNameViewController.m in Sources */,
 				BCFB0D601D519D9D00714152 /* UINavigationItem+Loading.m in Sources */,
 				BCFB0D3F1D519D9D00714152 /* NSString+JsonValue.m in Sources */,
 				BCFB0D4B1D519D9D00714152 /* UIButton+Submitting.m in Sources */,
@@ -816,6 +839,7 @@
 				BCFB0D371D519D9D00714152 /* NSDictionary+SafeAccess.m in Sources */,
 				BC4A6B441D50954F001D7433 /* YCNetwokTool.m in Sources */,
 				BCFB0C8D1D517FB400714152 /* YCTabBarController.m in Sources */,
+				BCE00E2C1D5473D6008B8AA5 /* YCUserInfoViewController.m in Sources */,
 				BCFB0D6D1D519D9D00714152 /* UIView+ViewController.m in Sources */,
 				BCFB0D651D519D9D00714152 /* UIView+Animation.m in Sources */,
 				BCFB0D711D519D9D00714152 /* UIViewController+MJPopupViewController.m in Sources */,

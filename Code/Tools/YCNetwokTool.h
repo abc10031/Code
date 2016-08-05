@@ -27,4 +27,8 @@
 
 //我们可以封装成想AFNetworking那样成功和失败分别走两个block
 + (void)getDataWithParameters:(NSDictionary *)params andCompleteBlock:(void(^)(BOOL success,id result))complete;
+
+//上传图片
+
++ (void)uploadImageData:(NSData *)imageData andParameters:(NSDictionary *)parameters completeBlock:(void(^)(BOOL success, id result))complete;
 @end

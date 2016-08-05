@@ -173,8 +173,10 @@
         [YCNetwokTool getDataWithParameters:params andCompleteBlock:^(BOOL success, id result) {
             NSLog(@"%d",success);
             if (success) {
-                NSLog(@"%@",result);
-               [[YCUserModel sharedUser] yy_modelSetWithDictionary:result];
+//                NSLog(@"%@",result);
+//               [[YCUserModel sharedUser] yy_modelSetWithDictionary:result];
+                
+                [YCUserModel loginWithInfo:result];
                 
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }else {
