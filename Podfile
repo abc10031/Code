@@ -11,7 +11,10 @@ pod "Masonry"
 
 pod "YYModel"
 
-#GitHub 官方出品的一个响应式编程框架 2.0是oc 3.0以上是swift用的
+pod "YYImage"
+pod "YYWebImage"
+
+#GitHub 官方出品的一个函数响应式编程框架【FRP】 2.0是oc 3.0以上是swift用的
 pod "ReactiveCocoa",'2.0'
 
 target :Code  do

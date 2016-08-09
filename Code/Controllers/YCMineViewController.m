@@ -8,6 +8,8 @@
 
 #import "YCMineViewController.h"
 #import "YCSettingViewController.h"
+#import <UIImageView+YYWebImage.h>
+#import "YCUserModel.h"
 
 @interface YCMineViewController ()
 
@@ -19,6 +21,12 @@
 /** 内容视图 加载scrollView上面 也实现了当内容不够的时候 界面有弹性滚动效果*/
 @property (nonatomic ,weak) UIView *contentView;
 
+/** 头像*/
+@property (nonatomic ,weak) UIImageView *headImageView;
+/** 昵称*/
+@property (nonatomic ,weak) UILabel *nickNameLabel;
+/** 邮箱*/
+@property (nonatomic ,weak) UILabel *emailLable;
 @end
 
 @implementation YCMineViewController
@@ -101,6 +109,7 @@
         make.left.top.equalTo(@16);
         make.width.height.equalTo(@48);
     }];
+    self.headImageView = headImageView;
     //用户昵称
     
     UILabel *nickNameLabel = [[UILabel alloc] init];
@@ -112,6 +121,7 @@
         make.top.equalTo(@16);
         make.width.equalTo(@200);
     }];
+    self.nickNameLabel = nickNameLabel;
     //用户邮箱
     UILabel *emailLabel = [[UILabel alloc] init];
     [bgView addSubview:emailLabel];
@@ -123,6 +133,7 @@
         make.top.equalTo(nickNameLabel.mas_bottom).offset(4);
         make.width.equalTo(@200);
     }];
+    self.emailLable = emailLabel;
     //设置按钮
     UIButton *settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [bgView addSubview:settingBtn];
@@ -145,4 +156,43 @@
         [self.navigationController pushViewController:settingVc animated:YES];
     }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    //我们将用户信息的显示写到这里，每次进到页面，可能会有更新的内容需要修改
+    
+    
+    //1.用户刚登陆成功，然后点到这个页面
+    //2.用户在设置界面修改了内容，回到这个页面
+    //3.用户退出登录，又登陆另一个账户
+    
+    [self.headImageView yy_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://10.30.152.134/PhalApi/Public/%@",[YCUserModel sharedUser].avatar]] placeholder:[UIImage imageNamed:@"用户头像"]];
+    self.nickNameLabel.text = [YCUserModel sharedUser].nickname;
+    self.emailLable.text = [YCUserModel sharedUser].email;
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

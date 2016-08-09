@@ -10,7 +10,11 @@
 #import "YCUserModel.h"
 #import "YCEditNameViewController.h"
 
-@interface YCUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import <UIImageView+YYWebImage.h>
+
+#import "YCImageViewController.h"
+
+@interface YCUserInfoViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIViewControllerPreviewingDelegate>
 
 /** 数据*/
 @property (nonatomic ,strong) NSArray *dataArray;
@@ -30,8 +34,36 @@
     [self initData];
     
     [self setUpTableView];
+    
+    [self setUpThreeTouch];
+}
+/**
+ *  forceTouch
+ */
+- (void)setUpThreeTouch {
+    if ([[UIDevice currentDevice].systemVersion integerValue] >= 9.0) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.headerImageView];
+    }
 }
 
+#pragma mark -- <UIViewControllerPreviewingDelegate>
+
+
+
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location {
+    
+    //peek 轻按预览功能 可以轻按显示一个预览控制器
+    YCImageViewController *imageVc = [[YCImageViewController alloc] init];
+    return imageVc;
+}
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
+    
+    //pop 重力按压会调用这个方法，我们在这里可以做任意操作，一般情况下是跳转到预览的控制器
+    [self.navigationController pushViewController:viewControllerToCommit animated:YES];
+    
+}
+
+#pragma mark -- 初始化数据
 //初始化数据
 - (void)initData {
     
@@ -80,6 +112,7 @@
         make.center.equalTo(@0);
         make.width.height.equalTo(@100);
     }];
+    
     //给头像添加点击手势
     headerImageView.userInteractionEnabled = YES;
     [headerImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editHeaderImage:)]];
@@ -105,15 +138,14 @@
     [logOffBtn handleControlEvents:UIControlEventTouchUpInside withBlock:^(id weakSender) {
        
         [YCUserModel logOff];
-        
-        
-#warning 写到这里了##########
-//        [self.navigationController popToRootViewControllerAnimated:YES];
+    
     }];
     
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     tableView.sectionFooterHeight = 8;
     tableView.sectionHeaderHeight = 8;
+    [headerImageView yy_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://10.30.152.134/PhalApi/Public/%@",[YCUserModel sharedUser].avatar]] placeholder:[UIImage imageNamed:@"用户头像"]];
+    
 }
 
 #pragma mark -- 代理和数据源
@@ -198,6 +230,10 @@
     
     [YCNetwokTool uploadImageData:imageData andParameters:params completeBlock:^(BOOL success, id result) {
         
+        if (success) {//如果这里上传成功，修改用户model
+            [YCUserModel loginWithInfo:result];
+            
+        }
     }];
     
     //将控制器隐藏

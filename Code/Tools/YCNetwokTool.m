@@ -105,6 +105,9 @@ static AFHTTPSessionManager *manager;
         }else {
             
             NSLog(@"%@",responseObject);
+            if (complete) {
+                complete(YES,responseObject[@"data"][@"data"]);
+            }
         }
         
     }];

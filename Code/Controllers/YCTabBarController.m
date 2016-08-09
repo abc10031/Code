@@ -27,8 +27,22 @@
     
     //设置界面显示样式
     [self setUpAppearance];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logOFF) name:YCLogOffSuccess object:nil];
 }
 
+- (void)logOFF {
+    
+#warning todo
+    
+    //
+    [(UINavigationController *)[self selectedViewController] popToRootViewControllerAnimated:YES];
+    
+    [self setSelectedIndex:0];
+    
+    [self showLoginViewController];
+    
+}
 - (void)setUpAppearance {
     
     //文本框光标的颜色

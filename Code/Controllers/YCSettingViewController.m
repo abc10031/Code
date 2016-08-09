@@ -8,7 +8,9 @@
 
 #import "YCSettingViewController.h"
 #import "YCUserInfoViewController.h"
-
+#import "YCAboutViewController.h"
+#import "YCSuggestViewController.h"
+#import "YCTriangleViewController.h"
 
 @interface YCSettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -72,6 +74,11 @@ static NSString *const settingCellID = @"setting";
                            @{
                                @"title":@"账号绑定",
                                @"subtitle":@"QQ123456",
+                               @"acceryType":@"arrow"
+                               },
+                           @{
+                               @"title":@"CoreGraphics",
+                               @"subtitle":@"Demo",
                                @"acceryType":@"arrow"
                                }
                            ],
@@ -163,7 +170,20 @@ static NSString *const settingCellID = @"setting";
         YCUserInfoViewController *userVC = [[YCUserInfoViewController alloc] init];
         
         [self.navigationController pushViewController:userVC animated:YES];
+    }else if (indexPath.section == 3 && indexPath.row == 2) {
+        
+        YCAboutViewController *aboutVC = [[YCAboutViewController alloc] init];
+        [self.navigationController pushViewController:aboutVC animated:YES];
+    }else if (indexPath.section == 3 && indexPath.row == 1) {
+        
+        YCSuggestViewController *suggestVC = [[YCSuggestViewController alloc] init];
+        [self.navigationController pushViewController:suggestVC animated:YES];
+    }else if (indexPath.section == 2 && indexPath.row == 2) {
+        
+        YCTriangleViewController *triangleVC = [[YCTriangleViewController alloc] init];
+        [self presentViewController:triangleVC animated:YES completion:nil];
     }
+
     
 }
 @end
